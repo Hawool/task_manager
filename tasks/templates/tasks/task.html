@@ -1,0 +1,17 @@
+{% extends "tasks/base.html" %}
+{% block title %}
+    <title>{{ task }}</title>
+{% endblock %}
+
+{% block header %}
+    <h1>{{ task }}</h1>
+{% endblock %}
+{% block context %}
+
+    {% for entry in entries.all %}
+        <p>{{ entry.text|linebreaks }}</p>
+    {% empty %}
+        There are no entries for this topic yet.
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "tasks/base.html" %}
+{% block title %}
+    <title>Tasks</title>
+{% endblock %}
+
+{% block header %}
+    <h1>Your tasks</h1>
+{% endblock %}
+{% block context %}
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <a href="{% url 'tasks:task' task.id %}">{{ task }}</a>
+            </li>
+<!--            <p>{{ entry.text }}</p>-->
+        {% empty %}
+            <li>No tasks have been added yet.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'tasks:new_task' %}">Add a new task:</a>
+{% endblock %}
