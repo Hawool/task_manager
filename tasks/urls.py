@@ -12,4 +12,7 @@ urlpatterns = [
     path('tasks/<task_id>/', views.task, name='task'),
     # Page for new task
     path('new_task/', views.new_task, name='new_task'),
+    # PAge for editing a task
+    path('edit_task/<task_id>/', views.edit_task, name='edit_task'),
+
 ]

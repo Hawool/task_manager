@@ -10,9 +10,13 @@
     <ul>
         {% for task in tasks %}
             <li>
-                <a href="{% url 'tasks:task' task.id %}">{{ task }}</a>
+                <a href="{% url 'tasks:task' task.id %}">{{ task.name }}</a> Time: {{ task.date_added }}
+                <p>Status: {{ task.stat }}</p>
+                <p>Description: {{ task.text }}</p>
+                <p>
+                    <a href="{% url 'tasks:edit_task' task.id %}">edit task</a>
+                </p>
             </li>
-<!--            <p>{{ entry.text }}</p>-->
         {% empty %}
             <li>No tasks have been added yet.</li>
         {% endfor %}

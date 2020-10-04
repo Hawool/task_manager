@@ -42,3 +42,21 @@ def new_task(request):
 
     context = {'form': form}
     return render(request, 'tasks/new_task.html', context)
+
+
+def edit_task(request, task_id):
+    """Editing a task"""
+    task = Task.objects.get(id=task_id)
+
+    if request.method != 'POST':
+        form = TaskForm(instance=task)
+    else:
+        form = TaskForm(instance=task, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('tasks:task',
+                                                args=[task_id]))
+
+    context = {'task': task, 'form': form}
+    return render(request, 'tasks/edit_task.html', context)
+

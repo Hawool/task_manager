@@ -16,10 +16,11 @@ class Task(models.Model):
     name = models.CharField(max_length=200)
     stat = models.CharField(max_length=2, choices=STATUS, default=NEW,)
     date_added = models.DateTimeField(auto_now_add=True)
+    text = models.TextField(null=True)
 
     def __str__(self):
         """Return string model"""
-        return '%s %s' % (self.name, self.stat)
+        return '%s %s %s' % (self.name, self.stat, self.text)
 
 
 class Entry(models.Model):
