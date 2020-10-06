@@ -1,10 +1,10 @@
 {% extends "tasks/base.html" %}
 {% block title %}
-<title>Tasks</title>
+<title>Stat In hand</title>
 {% endblock %}
 
 {% block header %}
-<h1>Your tasks</h1>
+<h1>Your tasks in hand</h1>
 {% endblock %}
 {% block context %}
 <div>
@@ -19,18 +19,20 @@
 <div class="taskContainer">
     <ul>
     {% for task in tasks %}
-    <li>
-        <p>{{ task.name }}</p> Time: {{ task.date_added }}
-        <p>Status: {{ task.stat }}</p>
-        <p>Description: {{ task.text }}</p>
-        <p>Planned finish time: {{ task.date_planned }}</p>
-        <p>
-            <a href="{% url 'tasks:edit_task' task.id %}">edit task</a>
-        </p>
-        <p>
-            <a href="{% url 'tasks:delete_task' task.id %}">Delete task</a>
-        </p>
-    </li>
+        {% if task.stat == "In hand" %}
+            <div class="Box In hand">
+                <p>{{ task.name }}</p> Time: {{ task.date_added }}
+                <p>Status: {{ task.stat }}</p>
+                <p>Description: {{ task.text }}</p>
+                <p>Planned finish time: {{ task.date_planned }}</p>
+                <p>
+                    <a href="{% url 'tasks:edit_task' task.id %}">edit task</a>
+                </p>
+                <p>
+                    <a href="{% url 'tasks:delete_task' task.id %}">Delete task</a>
+                </p>
+            </div>
+        {% endif %}
     {% empty %}
     <li>No tasks have been added yet.</li>
     {% endfor %}

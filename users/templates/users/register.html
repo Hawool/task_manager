@@ -1,0 +1,16 @@
+{% extends "tasks/base.html" %}
+{% block title %}
+    <title>Register</title>
+{% endblock %}
+
+{% block header %}
+    <h2>{{ register }}</h2>
+{% endblock header %}
+{% block context %}
+    <form method="post" action="{% url 'users:register' %}" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+            <button name="submit">register</button>
+        <input type="hidden" name="next" value="{% url 'tasks:index' %}" />
+    </form>
+{% endblock %}
