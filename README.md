@@ -1,15 +1,6 @@
 # Task manager
 Project of Task manager
 
-Prepare to use:
-+ git clone https://github.com/Hawool/task_manager.git
-+ cd task_manager/
-+ pip3 install -r requirements.txt
-
-Test run:
-+ python manage.py runserver
-+ Then open in your browser http://127.0.0.1:8000/.
-
 Данный сервис реализован на Python3 с использованием веб-фреймворка Django. Данные сервиса хранятся в реляционной базе данных PostgreSQL. С интерфейсов в виде JSON:API пока особо не разобрался, не могу понять где его применить и как использовать.
 
 Что удалось реализовать:
@@ -28,5 +19,14 @@ Test run:
 + Пользователь может менять планируемое время завершения, название и описание - **реализовано**.
 + Пользователь может получить список своих задач, с возможностью фильтрации по статусу и планируемому времени завершения - **реализовано. Фильтрация проходит на отдельных страничках с помощью html.**
 + Большим плюсом будет возможность просмотреть историю изменений задачи (названия, описания, статуса, времени завершения) - **этого нет, пока не знаю как сделать**. 
+
+Prepare to use:
++ git clone https://github.com/Hawool/task_manager.git
++ cd task_manager/
++ pip3 install -r requirements.txt
+
+Test run:
++ python manage.py runserver
++ Then open in your browser http://127.0.0.1:8000/.
 
 Спасибо за внимание!
