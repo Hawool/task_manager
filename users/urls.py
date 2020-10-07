@@ -4,7 +4,7 @@ from django.contrib.auth.views import LoginView
 from . import views
 
 urlpatterns = [
-    # Страница входа
+    # Page log in
     path('login/', LoginView.as_view(template_name='users/login.html'),
          name="login"),
     # Output page

@@ -10,7 +10,7 @@
     <form method="post" action="{% url 'users:register' %}" class="form">
         {% csrf_token %}
         {{ form.as_p }}
-            <button name="submit">register</button>
+        <button name="submit">register</button>
         <input type="hidden" name="next" value="{% url 'tasks:index' %}" />
     </form>
 {% endblock %}

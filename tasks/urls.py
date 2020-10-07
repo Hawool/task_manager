@@ -22,5 +22,7 @@ urlpatterns = [
     path('tasks/in_hand/', views.stat_in_hand, name='stat_in_hand'),
     # Page for completed tasks
     path('tasks/completed/', views.stat_completed, name='stat_completed'),
+    # Page with filtering tasks in the planned time
+    path('tasks/time_filter/', views.time_filter, name='time_filter'),
 
 ]

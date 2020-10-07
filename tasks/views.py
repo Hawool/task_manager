@@ -15,19 +15,13 @@ def index(request):
 def tasks(request):
     """Output task list"""
     tasks = Task.objects.filter(owner=request.user).order_by('date_added')
-    # task = Task.objects.get(id=task_id)
-    # entry = task.entry_set
-    # context = {'tasks': tasks, 'entry': entry}
-    # Check owner
-    # if tasks.owner != request.user:
-    #     raise Http404
     context = {'tasks': tasks}
     return render(request, 'tasks/tasks.html', context)
 
 
 @login_required
 def new_task(request):
-    """Defines a new tasl"""
+    """Defines a new task"""
     if request.method != 'POST':
         # No data has been sent, an empty form is created
         form = TaskForm()
@@ -44,11 +38,12 @@ def new_task(request):
     return render(request, 'tasks/new_task.html', context)
 
 
-
+@login_required
 def edit_task(request, task_id):
     """Editing a task"""
     task = Task.objects.get(id=task_id)
-    print(task)
+    if task.owner != request.user:
+        raise Http404
     if request.method != 'POST':
         form = TaskForm(instance=task)
     else:
@@ -60,13 +55,13 @@ def edit_task(request, task_id):
     return render(request, 'tasks/edit_task.html', context)
 
 
-def delete_task(task_id):
+@login_required
+def delete_task(request, task_id):
     """Delete function"""
     try:
         task = Task.objects.get(id=task_id)
-        print(task)
         task.delete()
-        return HttpResponseRedirect("/tasks")
+        return HttpResponseRedirect(reverse('tasks:tasks'))
     except Task.DoesNotExist:
         return HttpResponseNotFound("<h2>Task not found</h2>")
 
@@ -74,10 +69,7 @@ def delete_task(task_id):
 @login_required
 def stat_new(request):
     """Output new tasks"""
-    tasks = Task.objects.order_by('date_added')
-    # task = Task.objects.get(id=task_id)
-    # entry = task.entry_set
-    # context = {'tasks': tasks, 'entry': entry}
+    tasks = Task.objects.filter(owner=request.user).order_by('date_added')
     context = {'tasks': tasks}
     return render(request, 'tasks/stat_new.html', context)
 
@@ -85,10 +77,7 @@ def stat_new(request):
 @login_required
 def stat_planned(request):
     """Output planned tasks"""
-    tasks = Task.objects.order_by('date_added')
-    # task = Task.objects.get(id=task_id)
-    # entry = task.entry_set
-    # context = {'tasks': tasks, 'entry': entry}
+    tasks = Task.objects.filter(owner=request.user).order_by('date_added')
     context = {'tasks': tasks}
     return render(request, 'tasks/stat_planned.html', context)
 
@@ -96,10 +85,7 @@ def stat_planned(request):
 @login_required
 def stat_in_hand(request):
     """Output tasks in hand"""
-    tasks = Task.objects.order_by('date_added')
-    # task = Task.objects.get(id=task_id)
-    # entry = task.entry_set
-    # context = {'tasks': tasks, 'entry': entry}
+    tasks = Task.objects.filter(owner=request.user).order_by('date_added')
     context = {'tasks': tasks}
     return render(request, 'tasks/stat_in_hand.html', context)
 
@@ -107,9 +93,14 @@ def stat_in_hand(request):
 @login_required
 def stat_completed(request):
     """Output completed tasks"""
-    tasks = Task.objects.order_by('date_added')
-    # task = Task.objects.get(id=task_id)
-    # entry = task.entry_set
-    # context = {'tasks': tasks, 'entry': entry}
+    tasks = Task.objects.filter(owner=request.user).order_by('date_added')
     context = {'tasks': tasks}
     return render(request, 'tasks/stat_completed.html', context)
+
+
+@login_required
+def time_filter(request):
+    """Output filtered tasks"""
+    tasks = Task.objects.filter(owner=request.user).order_by('date_planned')
+    context = {'tasks': tasks}
+    return render(request, 'tasks/time_filter.html', context)
